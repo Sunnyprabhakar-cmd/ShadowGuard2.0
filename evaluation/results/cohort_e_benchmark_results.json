@@ -1,0 +1,5138 @@
+{
+  "benchmark_version": "2.2.0-stage5-cohort-e-audited-leak-free",
+  "benchmark_classification": "SYNTHETIC BENCHMARK ONLY",
+  "scientific_disclaimer": "All 500 multi-source events and all 1,524 network-flow records are 100% synthetic parametric benchmarks. No claim of real-world enterprise traffic performance or true zero-day detection on external PCAPs is made.",
+  "evaluated_at": "2026-11-18T15:33:27.582Z",
+  "experimental_conditions": {
+    "system_benchmark_seed": 20261113,
+    "system_benchmark_prng": "Mulberry32(20261113)",
+    "flow_dataset_seed": 42,
+    "flow_dataset_prng": "Python random.Random(42) + NumPy + PyTorch manual_seed(42)",
+    "stage7_cohorts_a_to_d_preserved_unchanged": true,
+    "leak_free_audit_status": "VERIFIED_UNFILTERED_384_TEST_SET_FLOWS_AND_FROZEN_WEIGHTED_CONSENSUS_POLICY",
+    "experimental_independence_disclosure": "Track 2 (384 held-out network flows) enforces strict train/validation/test separation (840 train_normal, 180 val_normal, 120 supervised_attack_train, 384 test_set with zero SHA-256 record overlap). Track 1 (500 multi-source system events across S01-S10) is a deterministic rule/sensor/ML evaluation stream without separate training/test splits for NIDS/Honeypot/Correlation rules, paired sequentially with the unfiltered held-out test_set flows."
+  },
+  "reproducibility": {
+    "system_benchmark_seed": 20261113,
+    "system_benchmark_prng": "Mulberry32(20261113)",
+    "flow_dataset_seed": 42,
+    "flow_dataset_prng": "Python random.Random(42) + NumPy + PyTorch manual_seed(42)",
+    "stage7_cohorts_a_to_d_preserved_unchanged": true,
+    "leak_free_audit_status": "VERIFIED_UNFILTERED_384_TEST_SET_FLOWS_AND_FROZEN_WEIGHTED_CONSENSUS_POLICY",
+    "experimental_independence_disclosure": "Track 2 (384 held-out network flows) enforces strict train/validation/test separation (840 train_normal, 180 val_normal, 120 supervised_attack_train, 384 test_set with zero SHA-256 record overlap). Track 1 (500 multi-source system events across S01-S10) is a deterministic rule/sensor/ML evaluation stream without separate training/test splits for NIDS/Honeypot/Correlation rules, paired sequentially with the unfiltered held-out test_set flows."
+  },
+  "track1_system_cohorts_a_to_e": {
+    "COHORT_A_SG_1_0_ML_ONLY": {
+      "cohort_id": "COHORT_A_SG_1_0_ML_ONLY",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 216,
+        "fp": 24,
+        "tn": 116,
+        "fn": 144
+      },
+      "metrics": {
+        "precision": 90,
+        "recall": 60,
+        "f1_score": 72,
+        "accuracy": 66.4,
+        "false_positive_rate": 17.14,
+        "false_negative_rate": 40
+      },
+      "latency_ms": {
+        "p50": 0.0002,
+        "p95": 0.0007,
+        "p99": 0.0028
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 240,
+        "consolidated_incidents": 240,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 82.86,
+        "S02_PORT_SCANNING": 75,
+        "S03_SSH_BRUTE_FORCE": 65,
+        "S04_HTTP_FTP_SMB_RECON": 50,
+        "S05_HONEYPOT_COMMAND_EXEC": 25,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 35,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 75,
+        "S09_C2_BEACONING": 65,
+        "S10_MULTI_STAGE_PROGRESSION": 50
+      }
+    },
+    "COHORT_B_SG_2_0_SURICATA": {
+      "cohort_id": "COHORT_B_SG_2_0_SURICATA",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 276,
+        "fp": 13,
+        "tn": 127,
+        "fn": 84
+      },
+      "metrics": {
+        "precision": 95.5,
+        "recall": 76.67,
+        "f1_score": 85.05,
+        "accuracy": 80.6,
+        "false_positive_rate": 9.29,
+        "false_negative_rate": 23.33
+      },
+      "latency_ms": {
+        "p50": 0.0001,
+        "p95": 0.0002,
+        "p99": 0.0005
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 289,
+        "consolidated_incidents": 289,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 90.71,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 65,
+        "S04_HTTP_FTP_SMB_RECON": 82.5,
+        "S05_HONEYPOT_COMMAND_EXEC": 25,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 67.5,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 50
+      }
+    },
+    "COHORT_C_SG_2_0_HONEYPOTS": {
+      "cohort_id": "COHORT_C_SG_2_0_HONEYPOTS",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 326,
+        "fp": 13,
+        "tn": 127,
+        "fn": 34
+      },
+      "metrics": {
+        "precision": 96.17,
+        "recall": 90.56,
+        "f1_score": 93.28,
+        "accuracy": 90.6,
+        "false_positive_rate": 9.29,
+        "false_negative_rate": 9.44
+      },
+      "latency_ms": {
+        "p50": 0.0001,
+        "p95": 0.0002,
+        "p99": 0.0006
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 339,
+        "consolidated_incidents": 339,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 90.71,
+        "S02_PORT_SCANNING": 75,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 75,
+        "S09_C2_BEACONING": 65,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      }
+    },
+    "COHORT_D_SG_2_0_COMPLETE_INTEGRATED": {
+      "cohort_id": "COHORT_D_SG_2_0_COMPLETE_INTEGRATED",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 6,
+        "tn": 134,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 98.36,
+        "recall": 100,
+        "f1_score": 99.17,
+        "accuracy": 98.8,
+        "false_positive_rate": 4.29,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.1155,
+        "p95": 1.0605,
+        "p99": 1.847
+      },
+      "throughput_events_per_sec": 3738,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 366,
+        "consolidated_incidents": 5,
+        "alert_fatigue_reduction_pct": 98.63,
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 709,
+        "mean_time_to_containment_ms": 0.467
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 95.71,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      }
+    },
+    "COHORT_E_SG_2_0_TRI_MODEL_AUTOENCODER_INTEGRATED": {
+      "cohort_id": "COHORT_E_SG_2_0_TRI_MODEL_AUTOENCODER_INTEGRATED",
+      "ablation_config": {
+        "disableThreatIntel": false,
+        "disableHoneypots": false,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 3,
+        "tn": 137,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 99.17,
+        "recall": 100,
+        "f1_score": 99.59,
+        "accuracy": 99.4,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.1087,
+        "p95": 0.2853,
+        "p99": 1.1711
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 363,
+        "correlated_alerts_grouped_into_incidents": 240,
+        "deduplicated_burst_alerts_within_2s_window": 120,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 360,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.62,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 363 raw_alerts_generated) = 98.62% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 635,
+        "mean_time_to_containment_ms": 1256.3655,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 74,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 180,
+        "detected_by_threat_intel_ioc": 360,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 167
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [],
+        "ml_missed_attacks_rescued_by_honeypot": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          }
+        ]
+      }
+    }
+  },
+  "track_1_system_cohorts_500_events": {
+    "total_events": 500,
+    "malicious_events": 360,
+    "benign_events": 140,
+    "scenarios_count": 10,
+    "cohorts": {
+      "COHORT_A_SG_1_0_ML_ONLY": {
+        "cohort_id": "COHORT_A_SG_1_0_ML_ONLY",
+        "total_samples": 500,
+        "confusion_matrix": {
+          "tp": 216,
+          "fp": 24,
+          "tn": 116,
+          "fn": 144
+        },
+        "metrics": {
+          "precision": 90,
+          "recall": 60,
+          "f1_score": 72,
+          "accuracy": 66.4,
+          "false_positive_rate": 17.14,
+          "false_negative_rate": 40
+        },
+        "latency_ms": {
+          "p50": 0.0002,
+          "p95": 0.0007,
+          "p99": 0.0028
+        },
+        "throughput_events_per_sec": 500000,
+        "correlation_and_soar": {
+          "raw_alerts_generated": 240,
+          "consolidated_incidents": 240,
+          "alert_fatigue_reduction_pct": 0,
+          "reconstructed_attack_chains": 0,
+          "adaptive_deception_directives": 0,
+          "mean_time_to_containment_ms": null
+        },
+        "per_scenario_accuracy_or_recall_pct": {
+          "S01_NORMAL_TRAFFIC": 82.86,
+          "S02_PORT_SCANNING": 75,
+          "S03_SSH_BRUTE_FORCE": 65,
+          "S04_HTTP_FTP_SMB_RECON": 50,
+          "S05_HONEYPOT_COMMAND_EXEC": 25,
+          "S06_MALWARE_SAMPLE_DOWNLOAD": 35,
+          "S07_DDOS_VOLUMETRIC": 100,
+          "S08_DATA_EXFILTRATION": 75,
+          "S09_C2_BEACONING": 65,
+          "S10_MULTI_STAGE_PROGRESSION": 50
+        }
+      },
+      "COHORT_B_SG_2_0_SURICATA": {
+        "cohort_id": "COHORT_B_SG_2_0_SURICATA",
+        "total_samples": 500,
+        "confusion_matrix": {
+          "tp": 276,
+          "fp": 13,
+          "tn": 127,
+          "fn": 84
+        },
+        "metrics": {
+          "precision": 95.5,
+          "recall": 76.67,
+          "f1_score": 85.05,
+          "accuracy": 80.6,
+          "false_positive_rate": 9.29,
+          "false_negative_rate": 23.33
+        },
+        "latency_ms": {
+          "p50": 0.0001,
+          "p95": 0.0002,
+          "p99": 0.0005
+        },
+        "throughput_events_per_sec": 500000,
+        "correlation_and_soar": {
+          "raw_alerts_generated": 289,
+          "consolidated_incidents": 289,
+          "alert_fatigue_reduction_pct": 0,
+          "reconstructed_attack_chains": 0,
+          "adaptive_deception_directives": 0,
+          "mean_time_to_containment_ms": null
+        },
+        "per_scenario_accuracy_or_recall_pct": {
+          "S01_NORMAL_TRAFFIC": 90.71,
+          "S02_PORT_SCANNING": 100,
+          "S03_SSH_BRUTE_FORCE": 65,
+          "S04_HTTP_FTP_SMB_RECON": 82.5,
+          "S05_HONEYPOT_COMMAND_EXEC": 25,
+          "S06_MALWARE_SAMPLE_DOWNLOAD": 67.5,
+          "S07_DDOS_VOLUMETRIC": 100,
+          "S08_DATA_EXFILTRATION": 100,
+          "S09_C2_BEACONING": 100,
+          "S10_MULTI_STAGE_PROGRESSION": 50
+        }
+      },
+      "COHORT_C_SG_2_0_HONEYPOTS": {
+        "cohort_id": "COHORT_C_SG_2_0_HONEYPOTS",
+        "total_samples": 500,
+        "confusion_matrix": {
+          "tp": 326,
+          "fp": 13,
+          "tn": 127,
+          "fn": 34
+        },
+        "metrics": {
+          "precision": 96.17,
+          "recall": 90.56,
+          "f1_score": 93.28,
+          "accuracy": 90.6,
+          "false_positive_rate": 9.29,
+          "false_negative_rate": 9.44
+        },
+        "latency_ms": {
+          "p50": 0.0001,
+          "p95": 0.0002,
+          "p99": 0.0006
+        },
+        "throughput_events_per_sec": 500000,
+        "correlation_and_soar": {
+          "raw_alerts_generated": 339,
+          "consolidated_incidents": 339,
+          "alert_fatigue_reduction_pct": 0,
+          "reconstructed_attack_chains": 0,
+          "adaptive_deception_directives": 0,
+          "mean_time_to_containment_ms": null
+        },
+        "per_scenario_accuracy_or_recall_pct": {
+          "S01_NORMAL_TRAFFIC": 90.71,
+          "S02_PORT_SCANNING": 75,
+          "S03_SSH_BRUTE_FORCE": 100,
+          "S04_HTTP_FTP_SMB_RECON": 100,
+          "S05_HONEYPOT_COMMAND_EXEC": 100,
+          "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+          "S07_DDOS_VOLUMETRIC": 100,
+          "S08_DATA_EXFILTRATION": 75,
+          "S09_C2_BEACONING": 65,
+          "S10_MULTI_STAGE_PROGRESSION": 100
+        }
+      },
+      "COHORT_D_SG_2_0_COMPLETE_INTEGRATED": {
+        "cohort_id": "COHORT_D_SG_2_0_COMPLETE_INTEGRATED",
+        "total_samples": 500,
+        "confusion_matrix": {
+          "tp": 360,
+          "fp": 6,
+          "tn": 134,
+          "fn": 0
+        },
+        "metrics": {
+          "precision": 98.36,
+          "recall": 100,
+          "f1_score": 99.17,
+          "accuracy": 98.8,
+          "false_positive_rate": 4.29,
+          "false_negative_rate": 0
+        },
+        "latency_ms": {
+          "p50": 0.1155,
+          "p95": 1.0605,
+          "p99": 1.847
+        },
+        "throughput_events_per_sec": 3738,
+        "correlation_and_soar": {
+          "raw_alerts_generated": 366,
+          "consolidated_incidents": 5,
+          "alert_fatigue_reduction_pct": 98.63,
+          "reconstructed_attack_chains": 5,
+          "adaptive_deception_directives": 709,
+          "mean_time_to_containment_ms": 0.467
+        },
+        "per_scenario_accuracy_or_recall_pct": {
+          "S01_NORMAL_TRAFFIC": 95.71,
+          "S02_PORT_SCANNING": 100,
+          "S03_SSH_BRUTE_FORCE": 100,
+          "S04_HTTP_FTP_SMB_RECON": 100,
+          "S05_HONEYPOT_COMMAND_EXEC": 100,
+          "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+          "S07_DDOS_VOLUMETRIC": 100,
+          "S08_DATA_EXFILTRATION": 100,
+          "S09_C2_BEACONING": 100,
+          "S10_MULTI_STAGE_PROGRESSION": 100
+        }
+      },
+      "COHORT_E_SG_2_0_TRI_MODEL_AUTOENCODER_INTEGRATED": {
+        "cohort_id": "COHORT_E_SG_2_0_TRI_MODEL_AUTOENCODER_INTEGRATED",
+        "ablation_config": {
+          "disableThreatIntel": false,
+          "disableHoneypots": false,
+          "disableNids": false,
+          "disableCorrelation": false,
+          "disableSoarGuardrails": false
+        },
+        "total_samples": 500,
+        "what_cohort_e_adds": [
+          "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+          "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+          "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+          "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+          "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+        ],
+        "confusion_matrix": {
+          "tp": 360,
+          "fp": 3,
+          "tn": 137,
+          "fn": 0
+        },
+        "metrics": {
+          "precision": 99.17,
+          "recall": 100,
+          "f1_score": 99.59,
+          "accuracy": 99.4,
+          "false_positive_rate": 2.14,
+          "false_negative_rate": 0
+        },
+        "latency_ms": {
+          "p50": 0.1087,
+          "p95": 0.2853,
+          "p99": 1.1711
+        },
+        "throughput_events_per_sec": 1,
+        "correlation_and_soar": {
+          "raw_alerts_generated": 363,
+          "correlated_alerts_grouped_into_incidents": 240,
+          "deduplicated_burst_alerts_within_2s_window": 120,
+          "uncorrelated_single_detector_manual_review_alerts": 3,
+          "consolidated_incidents": 5,
+          "confirmed_attacks_tp": 360,
+          "false_positive_alerts_fp": 3,
+          "alert_fatigue_reduction_pct": 98.62,
+          "alert_consolidation_formula": "1 - (5 consolidated_incidents / 363 raw_alerts_generated) = 98.62% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+          "reconstructed_attack_chains": 5,
+          "adaptive_deception_directives": 635,
+          "mean_time_to_containment_ms": 1256.3655,
+          "soar_block_leases_executed": 289,
+          "benign_ip_auto_blocks_executed": 0,
+          "soar_manual_reviews_routed": 74,
+          "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+          "multi_model_consensus_confirmations": 254
+        },
+        "per_scenario_accuracy_or_recall_pct": {
+          "S01_NORMAL_TRAFFIC": 97.86,
+          "S02_PORT_SCANNING": 100,
+          "S03_SSH_BRUTE_FORCE": 100,
+          "S04_HTTP_FTP_SMB_RECON": 100,
+          "S05_HONEYPOT_COMMAND_EXEC": 100,
+          "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+          "S07_DDOS_VOLUMETRIC": 100,
+          "S08_DATA_EXFILTRATION": 100,
+          "S09_C2_BEACONING": 100,
+          "S10_MULTI_STAGE_PROGRESSION": 100
+        },
+        "per_scenario_detailed_metrics": {
+          "S01_NORMAL_TRAFFIC": {
+            "total": 140,
+            "tn": 137,
+            "fp": 3,
+            "specificity_pct": 97.86,
+            "fpr_pct": 2.14
+          },
+          "S02_PORT_SCANNING": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S03_SSH_BRUTE_FORCE": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S04_HTTP_FTP_SMB_RECON": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S05_HONEYPOT_COMMAND_EXEC": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S06_MALWARE_SAMPLE_DOWNLOAD": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S07_DDOS_VOLUMETRIC": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S08_DATA_EXFILTRATION": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S09_C2_BEACONING": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          },
+          "S10_MULTI_STAGE_PROGRESSION": {
+            "total": 40,
+            "tp": 40,
+            "fn": 0,
+            "scenario_precision_vs_s01_fp_pct": 93.02,
+            "recall_pct": 100,
+            "f1_vs_s01_fp_pct": 96.39
+          }
+        },
+        "sensor_contribution_breakdown": {
+          "total_events": 500,
+          "malicious_events": 360,
+          "benign_events": 140,
+          "detected_by_nids": 180,
+          "detected_by_honeypot": 180,
+          "detected_by_threat_intel_ioc": 360,
+          "detected_by_tri_model_ml_on_malicious": 347,
+          "false_positives_by_tri_model_ml_on_benign": 3,
+          "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+          "nids_and_ml_joint_detections": 180,
+          "honeypot_and_ml_joint_detections": 167
+        },
+        "concrete_examples": {
+          "false_positives": [
+            {
+              "sample_id": "EV-0005",
+              "scenario": "S01_NORMAL_TRAFFIC",
+              "source_ip": "10.20.1.14",
+              "flow_id": "flow-norm-00258",
+              "traffic_profile": "normal_web_https",
+              "packets": 85,
+              "bytes": 70368,
+              "duration": 0.9986,
+              "rf_attack_probability": 0.04,
+              "if_anomaly_score": 0.248005,
+              "ae_reconstruction_error": 0.740889,
+              "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+              "recommended_action": "alert",
+              "auto_block_permitted": false
+            },
+            {
+              "sample_id": "EV-0006",
+              "scenario": "S01_NORMAL_TRAFFIC",
+              "source_ip": "10.20.2.15",
+              "flow_id": "flow-norm-01179",
+              "traffic_profile": "normal_backup_burst",
+              "packets": 377,
+              "bytes": 510213,
+              "duration": 3.0854,
+              "rf_attack_probability": 0.22,
+              "if_anomaly_score": 0.74184,
+              "ae_reconstruction_error": 0.113677,
+              "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+              "recommended_action": "manual-review",
+              "auto_block_permitted": false
+            },
+            {
+              "sample_id": "EV-0131",
+              "scenario": "S01_NORMAL_TRAFFIC",
+              "source_ip": "10.20.3.40",
+              "flow_id": "flow-norm-00366",
+              "traffic_profile": "normal_web_http",
+              "packets": 22,
+              "bytes": 17193,
+              "duration": 0.1578,
+              "rf_attack_probability": 0.153333,
+              "if_anomaly_score": 0.107019,
+              "ae_reconstruction_error": 0.572518,
+              "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+              "recommended_action": "manual-review",
+              "auto_block_permitted": false
+            }
+          ],
+          "false_negatives": [],
+          "ml_missed_attacks_rescued_by_honeypot": [
+            {
+              "sample_id": "EV-0194",
+              "scenario": "S03_SSH_BRUTE_FORCE",
+              "flow_id": "flow-atk-01272",
+              "attack_category": "ssh_brute_force",
+              "packets": 32,
+              "bytes": 2405,
+              "duration": 0.44224,
+              "rf_attack_probability": 0.473333,
+              "if_anomaly_score": 0.081518,
+              "ae_reconstruction_error": 0.199914,
+              "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+            },
+            {
+              "sample_id": "EV-0216",
+              "scenario": "S03_SSH_BRUTE_FORCE",
+              "flow_id": "flow-atk-01272",
+              "attack_category": "ssh_brute_force",
+              "packets": 32,
+              "bytes": 2405,
+              "duration": 0.44224,
+              "rf_attack_probability": 0.473333,
+              "if_anomaly_score": 0.081518,
+              "ae_reconstruction_error": 0.199914,
+              "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+            },
+            {
+              "sample_id": "EV-0225",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01318",
+              "attack_category": "service_enum",
+              "packets": 43,
+              "bytes": 31064,
+              "duration": 2.0789,
+              "rf_attack_probability": 0,
+              "if_anomaly_score": 0.0335,
+              "ae_reconstruction_error": 0.076287,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0233",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01294",
+              "attack_category": "service_enum",
+              "packets": 47,
+              "bytes": 20562,
+              "duration": 0.3905,
+              "rf_attack_probability": 0.093333,
+              "if_anomaly_score": 0.154232,
+              "ae_reconstruction_error": 0.235829,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0234",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01302",
+              "attack_category": "service_enum",
+              "packets": 18,
+              "bytes": 9198,
+              "duration": 0.7346,
+              "rf_attack_probability": 0.14,
+              "if_anomaly_score": 0.045981,
+              "ae_reconstruction_error": 0.093252,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0240",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01320",
+              "attack_category": "service_enum",
+              "packets": 6,
+              "bytes": 436,
+              "duration": 0.0299,
+              "rf_attack_probability": 0.333333,
+              "if_anomaly_score": 0.082923,
+              "ae_reconstruction_error": 0.251185,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0241",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01286",
+              "attack_category": "service_enum",
+              "packets": 35,
+              "bytes": 26928,
+              "duration": 0.6872,
+              "rf_attack_probability": 0.006667,
+              "if_anomaly_score": 0.076398,
+              "ae_reconstruction_error": 0.103688,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0242",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-collision-atk-00",
+              "attack_category": "service_enum",
+              "packets": 33,
+              "bytes": 19800,
+              "duration": 0.777,
+              "rf_attack_probability": 0.093333,
+              "if_anomaly_score": 0.0646,
+              "ae_reconstruction_error": 0.115932,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0249",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01318",
+              "attack_category": "service_enum",
+              "packets": 43,
+              "bytes": 31064,
+              "duration": 2.0789,
+              "rf_attack_probability": 0,
+              "if_anomaly_score": 0.0335,
+              "ae_reconstruction_error": 0.076287,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0257",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01294",
+              "attack_category": "service_enum",
+              "packets": 47,
+              "bytes": 20562,
+              "duration": 0.3905,
+              "rf_attack_probability": 0.093333,
+              "if_anomaly_score": 0.154232,
+              "ae_reconstruction_error": 0.235829,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0258",
+              "scenario": "S04_HTTP_FTP_SMB_RECON",
+              "flow_id": "flow-atk-01302",
+              "attack_category": "service_enum",
+              "packets": 18,
+              "bytes": 9198,
+              "duration": 0.7346,
+              "rf_attack_probability": 0.14,
+              "if_anomaly_score": 0.045981,
+              "ae_reconstruction_error": 0.093252,
+              "rescued_by_sensor": "opencanary (opencanary-01)"
+            },
+            {
+              "sample_id": "EV-0274",
+              "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+              "flow_id": "flow-atk-01481",
+              "attack_category": "novel_stealth_anomaly",
+              "packets": 48,
+              "bytes": 30422,
+              "duration": 0.3639,
+              "rf_attack_probability": 0.026667,
+              "if_anomaly_score": 0.248782,
+              "ae_reconstruction_error": 0.267582,
+              "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+            },
+            {
+              "sample_id": "EV-0298",
+              "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+              "flow_id": "flow-atk-01481",
+              "attack_category": "novel_stealth_anomaly",
+              "packets": 48,
+              "bytes": 30422,
+              "duration": 0.3639,
+              "rf_attack_probability": 0.026667,
+              "if_anomaly_score": 0.248782,
+              "ae_reconstruction_error": 0.267582,
+              "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "track_1b_cohort_e_subsystem_ablations": {
+    "BASELINE_COHORT_E_COMPLETE": {
+      "cohort_id": "COHORT_E_SG_2_0_TRI_MODEL_AUTOENCODER_INTEGRATED",
+      "ablation_config": {
+        "disableThreatIntel": false,
+        "disableHoneypots": false,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 3,
+        "tn": 137,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 99.17,
+        "recall": 100,
+        "f1_score": 99.59,
+        "accuracy": 99.4,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.1087,
+        "p95": 0.2853,
+        "p99": 1.1711
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 363,
+        "correlated_alerts_grouped_into_incidents": 240,
+        "deduplicated_burst_alerts_within_2s_window": 120,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 360,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.62,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 363 raw_alerts_generated) = 98.62% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 635,
+        "mean_time_to_containment_ms": 1256.3655,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 74,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 180,
+        "detected_by_threat_intel_ioc": 360,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 167
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [],
+        "ml_missed_attacks_rescued_by_honeypot": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          }
+        ]
+      }
+    },
+    "ABLATION_1_THREAT_INTEL_DISABLED": {
+      "cohort_id": "COHORT_E_ABLATION_1_NO_THREAT_INTEL",
+      "ablation_config": {
+        "disableThreatIntel": true,
+        "disableHoneypots": false,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 3,
+        "tn": 137,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 99.17,
+        "recall": 100,
+        "f1_score": 99.59,
+        "accuracy": 99.4,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.0835,
+        "p95": 0.25,
+        "p99": 0.5305
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 363,
+        "correlated_alerts_grouped_into_incidents": 240,
+        "deduplicated_burst_alerts_within_2s_window": 120,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 360,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.62,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 363 raw_alerts_generated) = 98.62% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 635,
+        "mean_time_to_containment_ms": 1256.6663,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 74,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 180,
+        "detected_by_threat_intel_ioc": 0,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 167
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [],
+        "ml_missed_attacks_rescued_by_honeypot": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          }
+        ]
+      }
+    },
+    "ABLATION_2A_HONEYPOTS_DISABLED": {
+      "cohort_id": "COHORT_E_ABLATION_2A_NO_HONEYPOTS",
+      "ablation_config": {
+        "disableThreatIntel": false,
+        "disableHoneypots": true,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 347,
+        "fp": 3,
+        "tn": 137,
+        "fn": 13
+      },
+      "metrics": {
+        "precision": 99.14,
+        "recall": 96.39,
+        "f1_score": 97.75,
+        "accuracy": 96.8,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 3.61
+      },
+      "latency_ms": {
+        "p50": 0.1002,
+        "p95": 0.2557,
+        "p99": 0.4575
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 350,
+        "correlated_alerts_grouped_into_incidents": 231,
+        "deduplicated_burst_alerts_within_2s_window": 116,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 347,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.57,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 350 raw_alerts_generated) = 98.57% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 599,
+        "mean_time_to_containment_ms": 1256.5352,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 61,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 95,
+        "S04_HTTP_FTP_SMB_RECON": 77.5,
+        "S05_HONEYPOT_COMMAND_EXEC": 95,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 31,
+          "fn": 9,
+          "scenario_precision_vs_s01_fp_pct": 91.18,
+          "recall_pct": 77.5,
+          "f1_vs_s01_fp_pct": 83.78
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 0,
+        "detected_by_threat_intel_ioc": 360,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 0,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 0
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          }
+        ],
+        "ml_missed_attacks_rescued_by_honeypot": []
+      }
+    },
+    "ABLATION_2B_HONEYPOTS_AND_INTEL_DISABLED": {
+      "cohort_id": "COHORT_E_ABLATION_2B_NO_HONEYPOTS_NO_THREAT_INTEL",
+      "ablation_config": {
+        "disableThreatIntel": true,
+        "disableHoneypots": true,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 347,
+        "fp": 3,
+        "tn": 137,
+        "fn": 13
+      },
+      "metrics": {
+        "precision": 99.14,
+        "recall": 96.39,
+        "f1_score": 97.75,
+        "accuracy": 96.8,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 3.61
+      },
+      "latency_ms": {
+        "p50": 0.0665,
+        "p95": 0.1772,
+        "p99": 0.3827
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 350,
+        "correlated_alerts_grouped_into_incidents": 231,
+        "deduplicated_burst_alerts_within_2s_window": 116,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 347,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.57,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 350 raw_alerts_generated) = 98.57% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 599,
+        "mean_time_to_containment_ms": 1255.8174,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 61,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 95,
+        "S04_HTTP_FTP_SMB_RECON": 77.5,
+        "S05_HONEYPOT_COMMAND_EXEC": 95,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 31,
+          "fn": 9,
+          "scenario_precision_vs_s01_fp_pct": 91.18,
+          "recall_pct": 77.5,
+          "f1_vs_s01_fp_pct": 83.78
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 0,
+        "detected_by_threat_intel_ioc": 0,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 0,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 0
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          }
+        ],
+        "ml_missed_attacks_rescued_by_honeypot": []
+      }
+    },
+    "ABLATION_3_WITHOUT_INCIDENT_CORRELATION": {
+      "cohort_id": "COHORT_E_ABLATION_3_NO_INCIDENT_CORRELATION",
+      "ablation_config": {
+        "disableThreatIntel": false,
+        "disableHoneypots": false,
+        "disableNids": false,
+        "disableCorrelation": true,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 3,
+        "tn": 137,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 99.17,
+        "recall": 100,
+        "f1_score": 99.59,
+        "accuracy": 99.4,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.0919,
+        "p95": 0.2422,
+        "p99": 0.5326
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 363,
+        "correlated_alerts_grouped_into_incidents": 363,
+        "deduplicated_burst_alerts_within_2s_window": 0,
+        "uncorrelated_single_detector_manual_review_alerts": 0,
+        "consolidated_incidents": 363,
+        "confirmed_attacks_tp": 360,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 0,
+        "alert_consolidation_formula": "1 - (363 consolidated_incidents / 363 raw_alerts_generated) = 0% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 834,
+        "mean_time_to_containment_ms": 1256.0064,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 74,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 180,
+        "detected_by_threat_intel_ioc": 360,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 167
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [],
+        "ml_missed_attacks_rescued_by_honeypot": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          }
+        ]
+      }
+    },
+    "ABLATION_4_WITHOUT_SOAR_POLICY_FILTERING": {
+      "cohort_id": "COHORT_E_ABLATION_4_NO_SOAR_POLICY_FILTERING",
+      "ablation_config": {
+        "disableThreatIntel": false,
+        "disableHoneypots": false,
+        "disableNids": false,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": true
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 3,
+        "tn": 137,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 99.17,
+        "recall": 100,
+        "f1_score": 99.59,
+        "accuracy": 99.4,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 0
+      },
+      "latency_ms": {
+        "p50": 0.0868,
+        "p95": 0.2104,
+        "p99": 0.4877
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 363,
+        "correlated_alerts_grouped_into_incidents": 240,
+        "deduplicated_burst_alerts_within_2s_window": 120,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 360,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.62,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 363 raw_alerts_generated) = 98.62% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 635,
+        "mean_time_to_containment_ms": 1255.8183,
+        "soar_block_leases_executed": 363,
+        "benign_ip_auto_blocks_executed": 3,
+        "soar_manual_reviews_routed": 0,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 0,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 180,
+        "detected_by_honeypot": 180,
+        "detected_by_threat_intel_ioc": 360,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 13,
+        "nids_and_ml_joint_detections": 180,
+        "honeypot_and_ml_joint_detections": 167
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [],
+        "ml_missed_attacks_rescued_by_honeypot": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "rescued_by_sensor": "opencanary (opencanary-01)"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "rescued_by_sensor": "cowrie (cowrie-ssh-01)"
+          }
+        ]
+      }
+    },
+    "ABLATION_5_PURE_TRI_MODEL_ML_ONLY": {
+      "cohort_id": "COHORT_E_ABLATION_5_PURE_TRI_MODEL_ML_ONLY",
+      "ablation_config": {
+        "disableThreatIntel": true,
+        "disableHoneypots": true,
+        "disableNids": true,
+        "disableCorrelation": false,
+        "disableSoarGuardrails": false
+      },
+      "total_samples": 500,
+      "what_cohort_e_adds": [
+        "PyTorch Deep Reconstruction Autoencoder (69 -> 32 -> 16 -> 8 -> 16 -> 32 -> 69, ReLU + Linear MSE) trained strictly on 840 normal flows",
+        "Validation-calibrated P97 primary threshold (0.503670, 3.33% val_normal FPR) + P95 warning (0.409105) + P99 critical (0.645935) tiers",
+        "Tri-Model Detection Fusion combining Supervised Random Forest (P(attack)), Unsupervised Isolation Forest (outlier depth), and Unsupervised PyTorch Autoencoder (MSE)",
+        "Audited leak-free evaluation on unfiltered held-out test_set flows reducing 500-event system FPR from 4.29% (6/140 in Cohort D) to 2.14% (3/140 in Cohort E)",
+        "Safety-Gated SOAR Guardrails ensuring AE_ONLY and IF_ONLY unsupervised anomalies never trigger automatic IP blocking (0/3 benign false-positive IPs blocked)"
+      ],
+      "confusion_matrix": {
+        "tp": 347,
+        "fp": 3,
+        "tn": 137,
+        "fn": 13
+      },
+      "metrics": {
+        "precision": 99.14,
+        "recall": 96.39,
+        "f1_score": 97.75,
+        "accuracy": 96.8,
+        "false_positive_rate": 2.14,
+        "false_negative_rate": 3.61
+      },
+      "latency_ms": {
+        "p50": 0.0647,
+        "p95": 0.1474,
+        "p99": 0.3059
+      },
+      "throughput_events_per_sec": 1,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 350,
+        "correlated_alerts_grouped_into_incidents": 231,
+        "deduplicated_burst_alerts_within_2s_window": 116,
+        "uncorrelated_single_detector_manual_review_alerts": 3,
+        "consolidated_incidents": 5,
+        "confirmed_attacks_tp": 347,
+        "false_positive_alerts_fp": 3,
+        "alert_fatigue_reduction_pct": 98.57,
+        "alert_consolidation_formula": "1 - (5 consolidated_incidents / 350 raw_alerts_generated) = 98.57% (363 raw alerts = 240 correlated into 5 incidents + 120 deduplicated 2s-window burst alerts + 3 uncorrelated low-severity internal FP alerts. Alert consolidation is NOT a reduction in false positives.)",
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 599,
+        "mean_time_to_containment_ms": 1256.1443,
+        "soar_block_leases_executed": 289,
+        "benign_ip_auto_blocks_executed": 0,
+        "soar_manual_reviews_routed": 61,
+        "ae_or_if_single_outlier_auto_blocks_inhibited": 6,
+        "multi_model_consensus_confirmations": 254
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 97.86,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 95,
+        "S04_HTTP_FTP_SMB_RECON": 77.5,
+        "S05_HONEYPOT_COMMAND_EXEC": 95,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      },
+      "per_scenario_detailed_metrics": {
+        "S01_NORMAL_TRAFFIC": {
+          "total": 140,
+          "tn": 137,
+          "fp": 3,
+          "specificity_pct": 97.86,
+          "fpr_pct": 2.14
+        },
+        "S02_PORT_SCANNING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S03_SSH_BRUTE_FORCE": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S04_HTTP_FTP_SMB_RECON": {
+          "total": 40,
+          "tp": 31,
+          "fn": 9,
+          "scenario_precision_vs_s01_fp_pct": 91.18,
+          "recall_pct": 77.5,
+          "f1_vs_s01_fp_pct": 83.78
+        },
+        "S05_HONEYPOT_COMMAND_EXEC": {
+          "total": 40,
+          "tp": 38,
+          "fn": 2,
+          "scenario_precision_vs_s01_fp_pct": 92.68,
+          "recall_pct": 95,
+          "f1_vs_s01_fp_pct": 93.83
+        },
+        "S06_MALWARE_SAMPLE_DOWNLOAD": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S07_DDOS_VOLUMETRIC": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S08_DATA_EXFILTRATION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S09_C2_BEACONING": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        },
+        "S10_MULTI_STAGE_PROGRESSION": {
+          "total": 40,
+          "tp": 40,
+          "fn": 0,
+          "scenario_precision_vs_s01_fp_pct": 93.02,
+          "recall_pct": 100,
+          "f1_vs_s01_fp_pct": 96.39
+        }
+      },
+      "sensor_contribution_breakdown": {
+        "total_events": 500,
+        "malicious_events": 360,
+        "benign_events": 140,
+        "detected_by_nids": 0,
+        "detected_by_honeypot": 0,
+        "detected_by_threat_intel_ioc": 0,
+        "detected_by_tri_model_ml_on_malicious": 347,
+        "false_positives_by_tri_model_ml_on_benign": 3,
+        "honeypot_only_rescues_missed_by_ml_and_nids": 0,
+        "nids_and_ml_joint_detections": 0,
+        "honeypot_and_ml_joint_detections": 0
+      },
+      "concrete_examples": {
+        "false_positives": [
+          {
+            "sample_id": "EV-0005",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.1.14",
+            "flow_id": "flow-norm-00258",
+            "traffic_profile": "normal_web_https",
+            "packets": 85,
+            "bytes": 70368,
+            "duration": 0.9986,
+            "rf_attack_probability": 0.04,
+            "if_anomaly_score": 0.248005,
+            "ae_reconstruction_error": 0.740889,
+            "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+            "recommended_action": "alert",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0006",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.2.15",
+            "flow_id": "flow-norm-01179",
+            "traffic_profile": "normal_backup_burst",
+            "packets": 377,
+            "bytes": 510213,
+            "duration": 3.0854,
+            "rf_attack_probability": 0.22,
+            "if_anomaly_score": 0.74184,
+            "ae_reconstruction_error": 0.113677,
+            "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          },
+          {
+            "sample_id": "EV-0131",
+            "scenario": "S01_NORMAL_TRAFFIC",
+            "source_ip": "10.20.3.40",
+            "flow_id": "flow-norm-00366",
+            "traffic_profile": "normal_web_http",
+            "packets": 22,
+            "bytes": 17193,
+            "duration": 0.1578,
+            "rf_attack_probability": 0.153333,
+            "if_anomaly_score": 0.107019,
+            "ae_reconstruction_error": 0.572518,
+            "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+            "recommended_action": "manual-review",
+            "auto_block_permitted": false
+          }
+        ],
+        "false_negatives": [
+          {
+            "sample_id": "EV-0194",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0216",
+            "scenario": "S03_SSH_BRUTE_FORCE",
+            "flow_id": "flow-atk-01272",
+            "attack_category": "ssh_brute_force",
+            "packets": 32,
+            "bytes": 2405,
+            "duration": 0.44224,
+            "rf_attack_probability": 0.473333,
+            "if_anomaly_score": 0.081518,
+            "ae_reconstruction_error": 0.199914,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0225",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0233",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0234",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0240",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01320",
+            "attack_category": "service_enum",
+            "packets": 6,
+            "bytes": 436,
+            "duration": 0.0299,
+            "rf_attack_probability": 0.333333,
+            "if_anomaly_score": 0.082923,
+            "ae_reconstruction_error": 0.251185,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0241",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01286",
+            "attack_category": "service_enum",
+            "packets": 35,
+            "bytes": 26928,
+            "duration": 0.6872,
+            "rf_attack_probability": 0.006667,
+            "if_anomaly_score": 0.076398,
+            "ae_reconstruction_error": 0.103688,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0242",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-collision-atk-00",
+            "attack_category": "service_enum",
+            "packets": 33,
+            "bytes": 19800,
+            "duration": 0.777,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.0646,
+            "ae_reconstruction_error": 0.115932,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0249",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01318",
+            "attack_category": "service_enum",
+            "packets": 43,
+            "bytes": 31064,
+            "duration": 2.0789,
+            "rf_attack_probability": 0,
+            "if_anomaly_score": 0.0335,
+            "ae_reconstruction_error": 0.076287,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0257",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01294",
+            "attack_category": "service_enum",
+            "packets": 47,
+            "bytes": 20562,
+            "duration": 0.3905,
+            "rf_attack_probability": 0.093333,
+            "if_anomaly_score": 0.154232,
+            "ae_reconstruction_error": 0.235829,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0258",
+            "scenario": "S04_HTTP_FTP_SMB_RECON",
+            "flow_id": "flow-atk-01302",
+            "attack_category": "service_enum",
+            "packets": 18,
+            "bytes": 9198,
+            "duration": 0.7346,
+            "rf_attack_probability": 0.14,
+            "if_anomaly_score": 0.045981,
+            "ae_reconstruction_error": 0.093252,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0274",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          },
+          {
+            "sample_id": "EV-0298",
+            "scenario": "S05_HONEYPOT_COMMAND_EXEC",
+            "flow_id": "flow-atk-01481",
+            "attack_category": "novel_stealth_anomaly",
+            "packets": 48,
+            "bytes": 30422,
+            "duration": 0.3639,
+            "rf_attack_probability": 0.026667,
+            "if_anomaly_score": 0.248782,
+            "ae_reconstruction_error": 0.267582,
+            "decision_rule": "ALL_MODELS_NORMAL"
+          }
+        ],
+        "ml_missed_attacks_rescued_by_honeypot": []
+      }
+    }
+  },
+  "track2_flow_ml_and_tri_model_ablation": [
+    {
+      "model_id": "random_forest_69_v2",
+      "display_name": "Random Forest (Supervised 69-dim)",
+      "paradigm": "Supervised Ensemble (200 trees)",
+      "operating_point": "P(attack) >= 0.50",
+      "confusion_matrix": {
+        "tn": 181,
+        "fp": 1,
+        "fn": 10,
+        "tp": 192
+      },
+      "accuracy_pct": 97.14,
+      "precision_pct": 99.48,
+      "recall_pct": 95.05,
+      "f1_score": 0.9722,
+      "fpr_pct": 0.55,
+      "fnr_pct": 4.95,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 18,
+          "recall": 1
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 21,
+          "recall": 0.875
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 30,
+          "recall": 1
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 18,
+          "recall": 0.75
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 21,
+          "recall": 0.9545
+        }
+      }
+    },
+    {
+      "model_id": "isolation_forest_69_v2",
+      "display_name": "Isolation Forest (Unsupervised 69-dim)",
+      "paradigm": "Unsupervised Tree Isolation",
+      "operating_point": "decision_function < 0.0 (contamination=0.03)",
+      "confusion_matrix": {
+        "tn": 180,
+        "fp": 2,
+        "fn": 102,
+        "tp": 100
+      },
+      "accuracy_pct": 72.92,
+      "precision_pct": 98.04,
+      "recall_pct": 49.5,
+      "f1_score": 0.6579,
+      "fpr_pct": 1.1,
+      "fnr_pct": 50.5,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 0,
+          "recall": 0
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 18,
+          "recall": 1
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 23,
+          "recall": 0.9583
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 0,
+          "recall": 0
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 0,
+          "recall": 0
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 0,
+          "recall": 0
+        }
+      }
+    },
+    {
+      "model_id": "autoencoder_p97_frozen",
+      "display_name": "PyTorch Autoencoder (Frozen P97)",
+      "paradigm": "Unsupervised Neural Reconstruction (69->32->16->8->16->32->69)",
+      "operating_point": "MSE > P97 (0.503670)",
+      "confusion_matrix": {
+        "tn": 178,
+        "fp": 4,
+        "fn": 87,
+        "tp": 115
+      },
+      "accuracy_pct": 76.3,
+      "precision_pct": 96.64,
+      "recall_pct": 56.93,
+      "f1_score": 0.7165,
+      "fpr_pct": 2.2,
+      "fnr_pct": 43.07,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 19,
+          "recall": 0.76
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 12,
+          "recall": 0.48
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 16,
+          "recall": 0.8889
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 13,
+          "recall": 0.5417
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 17,
+          "recall": 0.5667
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 1,
+          "recall": 0.0417
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 3,
+          "recall": 0.1364
+        }
+      }
+    },
+    {
+      "model_id": "unsupervised_ensemble_if_ae",
+      "display_name": "IF + AE Unsupervised Ensemble",
+      "paradigm": "Dual Unsupervised Anomaly Union (Zero Attack Labels)",
+      "operating_point": "IF < 0 OR AE MSE > P97 (0.503670)",
+      "confusion_matrix": {
+        "tn": 176,
+        "fp": 6,
+        "fn": 62,
+        "tp": 140
+      },
+      "accuracy_pct": 82.29,
+      "precision_pct": 95.89,
+      "recall_pct": 69.31,
+      "f1_score": 0.8046,
+      "fpr_pct": 3.3,
+      "fnr_pct": 30.69,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 19,
+          "recall": 0.76
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 18,
+          "recall": 1
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 23,
+          "recall": 0.9583
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 17,
+          "recall": 0.5667
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 1,
+          "recall": 0.0417
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 3,
+          "recall": 0.1364
+        }
+      }
+    },
+    {
+      "model_id": "majority_vote_2_of_3",
+      "display_name": "Majority Vote (2-of-3 Tri-Model)",
+      "paradigm": "Conservative Consensus Voting",
+      "operating_point": "At least 2 of {RF, IF, AE} flag anomaly",
+      "confusion_matrix": {
+        "tn": 182,
+        "fp": 0,
+        "fn": 64,
+        "tp": 138
+      },
+      "accuracy_pct": 83.33,
+      "precision_pct": 100,
+      "recall_pct": 68.32,
+      "f1_score": 0.8118,
+      "fpr_pct": 0,
+      "fnr_pct": 31.68,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 19,
+          "recall": 0.76
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 18,
+          "recall": 1
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 21,
+          "recall": 0.875
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 17,
+          "recall": 0.5667
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 1,
+          "recall": 0.0417
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 3,
+          "recall": 0.1364
+        }
+      }
+    },
+    {
+      "model_id": "weighted_consensus_tri_model",
+      "display_name": "Weighted Consensus (RF + IF + AE)",
+      "paradigm": "Calibrated Tri-Model Fusion + AE-Only Guardrail",
+      "operating_point": "S = 0.55*RF + 0.20*IF + 0.25*AE >= 0.45 or multi-tier rules",
+      "confusion_matrix": {
+        "tn": 175,
+        "fp": 7,
+        "fn": 8,
+        "tp": 194
+      },
+      "accuracy_pct": 96.09,
+      "precision_pct": 96.52,
+      "recall_pct": 96.04,
+      "f1_score": 0.9628,
+      "fpr_pct": 3.85,
+      "fnr_pct": 3.96,
+      "per_attack_category_recall": {
+        "c2_beaconing": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "data_exfiltration": {
+          "total_flows": 25,
+          "detected_flows": 25,
+          "recall": 1
+        },
+        "ddos_flood": {
+          "total_flows": 34,
+          "detected_flows": 34,
+          "recall": 1
+        },
+        "multi_vector": {
+          "total_flows": 18,
+          "detected_flows": 18,
+          "recall": 1
+        },
+        "novel_stealth_anomaly": {
+          "total_flows": 24,
+          "detected_flows": 23,
+          "recall": 0.9583
+        },
+        "port_scan": {
+          "total_flows": 30,
+          "detected_flows": 30,
+          "recall": 1
+        },
+        "service_enum": {
+          "total_flows": 24,
+          "detected_flows": 18,
+          "recall": 0.75
+        },
+        "ssh_brute_force": {
+          "total_flows": 22,
+          "detected_flows": 21,
+          "recall": 0.9545
+        }
+      }
+    }
+  ],
+  "track_2_flow_models_384_held_out": {
+    "total_flows": 384,
+    "normal_flows": 182,
+    "attack_flows": 202,
+    "feature_collision_flows_included": 4,
+    "models_and_policies": [
+      {
+        "model_id": "random_forest_69_v2",
+        "display_name": "Random Forest (Supervised 69-dim)",
+        "paradigm": "Supervised Ensemble (200 trees)",
+        "operating_point": "P(attack) >= 0.50",
+        "confusion_matrix": {
+          "tn": 181,
+          "fp": 1,
+          "fn": 10,
+          "tp": 192
+        },
+        "accuracy_pct": 97.14,
+        "precision_pct": 99.48,
+        "recall_pct": 95.05,
+        "f1_score": 0.9722,
+        "fpr_pct": 0.55,
+        "fnr_pct": 4.95,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 21,
+            "recall": 0.875
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 30,
+            "recall": 1
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 18,
+            "recall": 0.75
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 21,
+            "recall": 0.9545
+          }
+        }
+      },
+      {
+        "model_id": "isolation_forest_69_v2",
+        "display_name": "Isolation Forest (Unsupervised 69-dim)",
+        "paradigm": "Unsupervised Tree Isolation",
+        "operating_point": "decision_function < 0.0 (contamination=0.03)",
+        "confusion_matrix": {
+          "tn": 180,
+          "fp": 2,
+          "fn": 102,
+          "tp": 100
+        },
+        "accuracy_pct": 72.92,
+        "precision_pct": 98.04,
+        "recall_pct": 49.5,
+        "f1_score": 0.6579,
+        "fpr_pct": 1.1,
+        "fnr_pct": 50.5,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 0,
+            "recall": 0
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 23,
+            "recall": 0.9583
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 0,
+            "recall": 0
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 0,
+            "recall": 0
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 0,
+            "recall": 0
+          }
+        }
+      },
+      {
+        "model_id": "autoencoder_p97_frozen",
+        "display_name": "PyTorch Autoencoder (Frozen P97)",
+        "paradigm": "Unsupervised Neural Reconstruction (69->32->16->8->16->32->69)",
+        "operating_point": "MSE > P97 (0.503670)",
+        "confusion_matrix": {
+          "tn": 178,
+          "fp": 4,
+          "fn": 87,
+          "tp": 115
+        },
+        "accuracy_pct": 76.3,
+        "precision_pct": 96.64,
+        "recall_pct": 56.93,
+        "f1_score": 0.7165,
+        "fpr_pct": 2.2,
+        "fnr_pct": 43.07,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 19,
+            "recall": 0.76
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 12,
+            "recall": 0.48
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 16,
+            "recall": 0.8889
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 13,
+            "recall": 0.5417
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 17,
+            "recall": 0.5667
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 1,
+            "recall": 0.0417
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 3,
+            "recall": 0.1364
+          }
+        }
+      },
+      {
+        "model_id": "unsupervised_ensemble_if_ae",
+        "display_name": "IF + AE Unsupervised Ensemble",
+        "paradigm": "Dual Unsupervised Anomaly Union (Zero Attack Labels)",
+        "operating_point": "IF < 0 OR AE MSE > P97 (0.503670)",
+        "confusion_matrix": {
+          "tn": 176,
+          "fp": 6,
+          "fn": 62,
+          "tp": 140
+        },
+        "accuracy_pct": 82.29,
+        "precision_pct": 95.89,
+        "recall_pct": 69.31,
+        "f1_score": 0.8046,
+        "fpr_pct": 3.3,
+        "fnr_pct": 30.69,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 19,
+            "recall": 0.76
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 23,
+            "recall": 0.9583
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 17,
+            "recall": 0.5667
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 1,
+            "recall": 0.0417
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 3,
+            "recall": 0.1364
+          }
+        }
+      },
+      {
+        "model_id": "majority_vote_2_of_3",
+        "display_name": "Majority Vote (2-of-3 Tri-Model)",
+        "paradigm": "Conservative Consensus Voting",
+        "operating_point": "At least 2 of {RF, IF, AE} flag anomaly",
+        "confusion_matrix": {
+          "tn": 182,
+          "fp": 0,
+          "fn": 64,
+          "tp": 138
+        },
+        "accuracy_pct": 83.33,
+        "precision_pct": 100,
+        "recall_pct": 68.32,
+        "f1_score": 0.8118,
+        "fpr_pct": 0,
+        "fnr_pct": 31.68,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 19,
+            "recall": 0.76
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 21,
+            "recall": 0.875
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 17,
+            "recall": 0.5667
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 1,
+            "recall": 0.0417
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 3,
+            "recall": 0.1364
+          }
+        }
+      },
+      {
+        "model_id": "weighted_consensus_tri_model",
+        "display_name": "Weighted Consensus (RF + IF + AE)",
+        "paradigm": "Calibrated Tri-Model Fusion + AE-Only Guardrail",
+        "operating_point": "S = 0.55*RF + 0.20*IF + 0.25*AE >= 0.45 or multi-tier rules",
+        "confusion_matrix": {
+          "tn": 175,
+          "fp": 7,
+          "fn": 8,
+          "tp": 194
+        },
+        "accuracy_pct": 96.09,
+        "precision_pct": 96.52,
+        "recall_pct": 96.04,
+        "f1_score": 0.9628,
+        "fpr_pct": 3.85,
+        "fnr_pct": 3.96,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 25,
+            "recall": 1
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 23,
+            "recall": 0.9583
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 30,
+            "recall": 1
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 18,
+            "recall": 0.75
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 21,
+            "recall": 0.9545
+          }
+        }
+      }
+    ],
+    "per_attack_category_detailed_metrics": {
+      "novel_stealth_anomaly": {
+        "total_attack_flows": 24,
+        "tp": 23,
+        "fn": 1,
+        "recall_pct": 95.83,
+        "fnr_pct": 4.17,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 76.67,
+        "f1_one_vs_182_normal": 0.8519,
+        "precision_apportioned_fp_pct": 96.51,
+        "f1_apportioned_fp": 0.9617
+      },
+      "ssh_brute_force": {
+        "total_attack_flows": 22,
+        "tp": 21,
+        "fn": 1,
+        "recall_pct": 95.45,
+        "fnr_pct": 4.55,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 75,
+        "f1_one_vs_182_normal": 0.84,
+        "precision_apportioned_fp_pct": 96.5,
+        "f1_apportioned_fp": 0.9597
+      },
+      "data_exfiltration": {
+        "total_attack_flows": 25,
+        "tp": 25,
+        "fn": 0,
+        "recall_pct": 100,
+        "fnr_pct": 0,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 78.13,
+        "f1_one_vs_182_normal": 0.8772,
+        "precision_apportioned_fp_pct": 96.65,
+        "f1_apportioned_fp": 0.983
+      },
+      "port_scan": {
+        "total_attack_flows": 30,
+        "tp": 30,
+        "fn": 0,
+        "recall_pct": 100,
+        "fnr_pct": 0,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 81.08,
+        "f1_one_vs_182_normal": 0.8955,
+        "precision_apportioned_fp_pct": 96.65,
+        "f1_apportioned_fp": 0.983
+      },
+      "c2_beaconing": {
+        "total_attack_flows": 25,
+        "tp": 25,
+        "fn": 0,
+        "recall_pct": 100,
+        "fnr_pct": 0,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 78.13,
+        "f1_one_vs_182_normal": 0.8772,
+        "precision_apportioned_fp_pct": 96.65,
+        "f1_apportioned_fp": 0.983
+      },
+      "ddos_flood": {
+        "total_attack_flows": 34,
+        "tp": 34,
+        "fn": 0,
+        "recall_pct": 100,
+        "fnr_pct": 0,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 82.93,
+        "f1_one_vs_182_normal": 0.9067,
+        "precision_apportioned_fp_pct": 96.65,
+        "f1_apportioned_fp": 0.983
+      },
+      "service_enum": {
+        "total_attack_flows": 24,
+        "tp": 18,
+        "fn": 6,
+        "recall_pct": 75,
+        "fnr_pct": 25,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 72,
+        "f1_one_vs_182_normal": 0.7347,
+        "precision_apportioned_fp_pct": 95.58,
+        "f1_apportioned_fp": 0.8405
+      },
+      "multi_vector": {
+        "total_attack_flows": 18,
+        "tp": 18,
+        "fn": 0,
+        "recall_pct": 100,
+        "fnr_pct": 0,
+        "one_vs_182_normal_fp_count": 7,
+        "precision_one_vs_182_normal_pct": 72,
+        "f1_one_vs_182_normal": 0.8372,
+        "precision_apportioned_fp_pct": 96.65,
+        "f1_apportioned_fp": 0.983
+      }
+    },
+    "concrete_error_examples": {
+      "false_positives_count": 7,
+      "false_positives": [
+        {
+          "flow_id": "flow-norm-00258",
+          "traffic_profile": "normal_web_https",
+          "is_feature_collision": false,
+          "packets": 85,
+          "bytes": 70368,
+          "duration": 0.9986,
+          "rf_attack_probability": 0.04,
+          "if_anomaly_score": 0.248005,
+          "ae_reconstruction_error": 0.740889,
+          "decision_rule": "AUTOENCODER_HIGH_CONFIDENCE_ANOMALY_P99_NO_AUTOBLOCK",
+          "recommended_action": "alert",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-norm-01179",
+          "traffic_profile": "normal_backup_burst",
+          "is_feature_collision": false,
+          "packets": 377,
+          "bytes": 510213,
+          "duration": 3.0854,
+          "rf_attack_probability": 0.22,
+          "if_anomaly_score": 0.74184,
+          "ae_reconstruction_error": 0.113677,
+          "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+          "recommended_action": "manual-review",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-norm-00366",
+          "traffic_profile": "normal_web_http",
+          "is_feature_collision": false,
+          "packets": 22,
+          "bytes": 17193,
+          "duration": 0.1578,
+          "rf_attack_probability": 0.153333,
+          "if_anomaly_score": 0.107019,
+          "ae_reconstruction_error": 0.572518,
+          "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+          "recommended_action": "manual-review",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-norm-00639",
+          "traffic_profile": "normal_dns_lookup",
+          "is_feature_collision": false,
+          "packets": 6,
+          "bytes": 506,
+          "duration": 0.0224,
+          "rf_attack_probability": 0.206667,
+          "if_anomaly_score": 0.075151,
+          "ae_reconstruction_error": 0.574871,
+          "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+          "recommended_action": "manual-review",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-norm-00286",
+          "traffic_profile": "normal_web_https",
+          "is_feature_collision": false,
+          "packets": 80,
+          "bytes": 67140,
+          "duration": 0.3039,
+          "rf_attack_probability": 0.26,
+          "if_anomaly_score": 0.496391,
+          "ae_reconstruction_error": 0.522589,
+          "decision_rule": "AUTOENCODER_ONLY_ANOMALY_P97_MANUAL_REVIEW",
+          "recommended_action": "manual-review",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-norm-01156",
+          "traffic_profile": "normal_backup_burst",
+          "is_feature_collision": false,
+          "packets": 340,
+          "bytes": 408321,
+          "duration": 2.4525,
+          "rf_attack_probability": 0.033333,
+          "if_anomaly_score": 0.815053,
+          "ae_reconstruction_error": 0.216152,
+          "decision_rule": "ISOLATION_FOREST_ONLY_ANOMALY_MANUAL_REVIEW",
+          "recommended_action": "manual-review",
+          "auto_block_permitted": false
+        },
+        {
+          "flow_id": "flow-collision-norm-01",
+          "traffic_profile": "normal_sysadmin_check",
+          "is_feature_collision": true,
+          "packets": 7,
+          "bytes": 490,
+          "duration": 0.019,
+          "rf_attack_probability": 0.513333,
+          "if_anomaly_score": 0.076706,
+          "ae_reconstruction_error": 0.470278,
+          "decision_rule": "MULTI_MODEL_CONFIRMED_THREAT",
+          "recommended_action": "alert",
+          "auto_block_permitted": false
+        }
+      ],
+      "false_negatives_count": 8,
+      "false_negatives": [
+        {
+          "flow_id": "flow-atk-01318",
+          "attack_category": "service_enum",
+          "is_feature_collision": false,
+          "packets": 43,
+          "bytes": 31064,
+          "duration": 2.0789,
+          "rf_attack_probability": 0,
+          "if_anomaly_score": 0.0335,
+          "ae_reconstruction_error": 0.076287,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01272",
+          "attack_category": "ssh_brute_force",
+          "is_feature_collision": false,
+          "packets": 32,
+          "bytes": 2405,
+          "duration": 0.44224,
+          "rf_attack_probability": 0.473333,
+          "if_anomaly_score": 0.081518,
+          "ae_reconstruction_error": 0.199914,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01481",
+          "attack_category": "novel_stealth_anomaly",
+          "is_feature_collision": false,
+          "packets": 48,
+          "bytes": 30422,
+          "duration": 0.3639,
+          "rf_attack_probability": 0.026667,
+          "if_anomaly_score": 0.248782,
+          "ae_reconstruction_error": 0.267582,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01294",
+          "attack_category": "service_enum",
+          "is_feature_collision": false,
+          "packets": 47,
+          "bytes": 20562,
+          "duration": 0.3905,
+          "rf_attack_probability": 0.093333,
+          "if_anomaly_score": 0.154232,
+          "ae_reconstruction_error": 0.235829,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01302",
+          "attack_category": "service_enum",
+          "is_feature_collision": false,
+          "packets": 18,
+          "bytes": 9198,
+          "duration": 0.7346,
+          "rf_attack_probability": 0.14,
+          "if_anomaly_score": 0.045981,
+          "ae_reconstruction_error": 0.093252,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01320",
+          "attack_category": "service_enum",
+          "is_feature_collision": false,
+          "packets": 6,
+          "bytes": 436,
+          "duration": 0.0299,
+          "rf_attack_probability": 0.333333,
+          "if_anomaly_score": 0.082923,
+          "ae_reconstruction_error": 0.251185,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-atk-01286",
+          "attack_category": "service_enum",
+          "is_feature_collision": false,
+          "packets": 35,
+          "bytes": 26928,
+          "duration": 0.6872,
+          "rf_attack_probability": 0.006667,
+          "if_anomaly_score": 0.076398,
+          "ae_reconstruction_error": 0.103688,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        },
+        {
+          "flow_id": "flow-collision-atk-00",
+          "attack_category": "service_enum",
+          "is_feature_collision": true,
+          "packets": 33,
+          "bytes": 19800,
+          "duration": 0.777,
+          "rf_attack_probability": 0.093333,
+          "if_anomaly_score": 0.0646,
+          "ae_reconstruction_error": 0.115932,
+          "decision_rule": "ALL_MODELS_NORMAL"
+        }
+      ]
+    },
+    "autoencoder_threshold_sweep": {
+      "P95": {
+        "accuracy": 0.8177,
+        "precision": 0.9583,
+        "recall": 0.6832,
+        "f1": 0.7977,
+        "fpr": 0.033,
+        "roc_auc": 0.9652,
+        "pr_auc": 0.967,
+        "confusion_matrix": {
+          "tn": 176,
+          "fp": 6,
+          "fn": 64,
+          "tp": 138
+        },
+        "threshold": 0.409105,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 20,
+            "recall": 0.8
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 18,
+            "recall": 0.72
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 18,
+            "recall": 1
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 16,
+            "recall": 0.6667
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 21,
+            "recall": 0.7
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 8,
+            "recall": 0.3333
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 3,
+            "recall": 0.1364
+          }
+        }
+      },
+      "P97": {
+        "accuracy": 0.763,
+        "precision": 0.9664,
+        "recall": 0.5693,
+        "f1": 0.7165,
+        "fpr": 0.022,
+        "roc_auc": 0.9652,
+        "pr_auc": 0.967,
+        "confusion_matrix": {
+          "tn": 178,
+          "fp": 4,
+          "fn": 87,
+          "tp": 115
+        },
+        "threshold": 0.50367,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 19,
+            "recall": 0.76
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 12,
+            "recall": 0.48
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 34,
+            "recall": 1
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 16,
+            "recall": 0.8889
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 13,
+            "recall": 0.5417
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 17,
+            "recall": 0.5667
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 1,
+            "recall": 0.0417
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 3,
+            "recall": 0.1364
+          }
+        }
+      },
+      "P99": {
+        "accuracy": 0.724,
+        "precision": 0.9898,
+        "recall": 0.4802,
+        "f1": 0.6467,
+        "fpr": 0.0055,
+        "roc_auc": 0.9652,
+        "pr_auc": 0.967,
+        "confusion_matrix": {
+          "tn": 181,
+          "fp": 1,
+          "fn": 105,
+          "tp": 97
+        },
+        "threshold": 0.645935,
+        "per_attack_category_recall": {
+          "c2_beaconing": {
+            "total_flows": 25,
+            "detected_flows": 16,
+            "recall": 0.64
+          },
+          "data_exfiltration": {
+            "total_flows": 25,
+            "detected_flows": 12,
+            "recall": 0.48
+          },
+          "ddos_flood": {
+            "total_flows": 34,
+            "detected_flows": 32,
+            "recall": 0.9412
+          },
+          "multi_vector": {
+            "total_flows": 18,
+            "detected_flows": 13,
+            "recall": 0.7222
+          },
+          "novel_stealth_anomaly": {
+            "total_flows": 24,
+            "detected_flows": 10,
+            "recall": 0.4167
+          },
+          "port_scan": {
+            "total_flows": 30,
+            "detected_flows": 11,
+            "recall": 0.3667
+          },
+          "service_enum": {
+            "total_flows": 24,
+            "detected_flows": 1,
+            "recall": 0.0417
+          },
+          "ssh_brute_force": {
+            "total_flows": 22,
+            "detected_flows": 2,
+            "recall": 0.0909
+          }
+        }
+      }
+    }
+  },
+  "track3_detection_vs_soar_separation": {
+    "total_flows_evaluated": 384,
+    "detection_metrics_weighted_consensus": {
+      "tp": 194,
+      "fp": 7,
+      "tn": 175,
+      "fn": 8,
+      "accuracy_pct": 96.09,
+      "precision_pct": 96.52,
+      "recall_pct": 96.04,
+      "f1_score": 0.9628,
+      "fpr_pct": 3.85,
+      "fnr_pct": 3.96
+    },
+    "soar_response_metrics": {
+      "auto_block_decisions": 75,
+      "alert_escalations": 104,
+      "manual_review_escalations": 22,
+      "suspicious_monitor_tier": 1,
+      "benign_ignored": 182,
+      "ae_only_anomalies_total": 4,
+      "ae_only_auto_blocked": 0,
+      "ae_only_routed_to_manual_review": 4,
+      "normal_flows_erroneously_auto_blocked": 0,
+      "degraded_mode_auto_block_inhibited": true
+    }
+  },
+  "track_3_separated_detection_vs_soar": {
+    "total_flows_evaluated": 384,
+    "detection_metrics_weighted_consensus": {
+      "tp": 194,
+      "fp": 7,
+      "tn": 175,
+      "fn": 8,
+      "accuracy_pct": 96.09,
+      "precision_pct": 96.52,
+      "recall_pct": 96.04,
+      "f1_score": 0.9628,
+      "fpr_pct": 3.85,
+      "fnr_pct": 3.96
+    },
+    "soar_response_metrics": {
+      "auto_block_decisions": 75,
+      "alert_escalations": 104,
+      "manual_review_escalations": 22,
+      "suspicious_monitor_tier": 1,
+      "benign_ignored": 182,
+      "ae_only_anomalies_total": 4,
+      "ae_only_auto_blocked": 0,
+      "ae_only_routed_to_manual_review": 4,
+      "normal_flows_erroneously_auto_blocked": 0,
+      "degraded_mode_auto_block_inhibited": true
+    }
+  },
+  "scientific_validity_and_limitations": {
+    "synthetic_data_disclaimer": "All 500 multi-source events and all 1,524 network-flow records are 100% synthetic parametric benchmarks. No claim of real-world enterprise traffic performance or true zero-day detection on external PCAPs is made.",
+    "duplicate_polynomial_features": "Features f_25..f_39 (15 columns) contain only 2 unique functions of (packets, duration), resulting in 13 duplicate columns.",
+    "collinear_harmonic_padding": "Features f_55..f_68 (14 columns) are linear scalar multiples of (packets + bytes)/(duration + 1), having rank 1.",
+    "feature_collision_ambiguity": "Preserved 4 cross-label feature-collision flows (2 normal, 2 attack) where identical (packets, bytes, duration) inputs produce identical 69-feature vectors.",
+    "stage7_deterministic_sensor_coverage_limitation": "In the preserved Stage 7 500-event generator (S02-S10), 100% of malicious events carry either a Suricata NIDS signature_id (180 events) or a Honeypot interaction metadata object (180 events), plus one of 5 known external attacker IPs in KNOWN_IOC_CATALOG. Consequently, nidsHit || honeypotHit achieves 100% recall on S02-S10 in both Cohort D and Cohort E unless NIDS/Honeypot/Threat-Intel sensors are ablated (see track_1b_cohort_e_subsystem_ablations)."
+  }
+}

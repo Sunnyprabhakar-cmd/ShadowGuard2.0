@@ -1,0 +1,455 @@
+name: shadow_guard
+
+networks:
+  sg_ingress_net:
+    driver: bridge
+  sg_core_net:
+    driver: bridge
+  sg_deception_dmz:
+    driver: bridge
+  sg_storage_net:
+    driver: bridge
+  sg_frontend_net:
+    driver: bridge
+
+services:
+  # ============================================================================
+  # 1. CORE DATA & MESSAGE BROKER PLANE
+  # ============================================================================
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: threat_logs
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d threat_logs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sg_storage_net
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: sg-rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=shadowguard
+      - RABBITMQ_DEFAULT_PASS=shadowguard_secret
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sg_core_net
+
+  # ============================================================================
+  # 2. INGESTION & NETWORK INTRUSION DETECTION (NIDS)
+  # ============================================================================
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: sg-suricata
+    command: ["-i", "eth0", "-c", "/etc/suricata/suricata.yaml"]
+    volumes:
+      - ./suricata/suricata.yaml:/etc/suricata/suricata.yaml:ro
+      - ./suricata/rules:/etc/suricata/rules:ro
+      - suricata_logs:/var/log/suricata
+    networks:
+      - sg_ingress_net
+
+  suricata-event-collector-service:
+    build: ./suricata-event-collector-service
+    ports:
+      - "3007:3000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    volumes:
+      - suricata_logs:/var/log/suricata:ro
+    environment:
+      - NODE_ENV=production
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - SURICATA_EVE_PATH=/var/log/suricata/eve.json
+    networks:
+      - sg_core_net
+
+  traffic-capture-service:
+    build: ./traffic-capture-service
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+    networks:
+      - sg_ingress_net
+      - sg_core_net
+
+  # ============================================================================
+  # 3. DECEPTION INFRASTRUCTURE (HONEYPOTS & COLLECTOR)
+  # ============================================================================
+  cowrie:
+    image: cowrie/cowrie:latest
+    container_name: sg-cowrie-decoy
+    ports:
+      - "2222:2222"
+      - "2223:2223"
+    volumes:
+      - ./deception/cowrie/cowrie.cfg:/cowrie/cowrie-git/etc/cowrie.cfg:ro
+      - cowrie_logs:/cowrie/cowrie-git/var/log/cowrie
+    networks:
+      - sg_deception_dmz
+
+  opencanary:
+    build: ./deception/opencanary
+    container_name: sg-opencanary-decoy
+    ports:
+      - "8080:8080"
+      - "2121:2121"
+      - "3306:3306"
+    volumes:
+      - ./deception/opencanary/opencanary.conf:/root/.opencanary.conf:ro
+      - opencanary_logs:/var/log/opencanary
+    networks:
+      - sg_deception_dmz
+
+  honeypot-event-collector-service:
+    build: ./honeypot-event-collector-service
+    ports:
+      - "3011:3000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    volumes:
+      - cowrie_logs:/var/log/cowrie:ro
+      - opencanary_logs:/var/log/opencanary:ro
+    environment:
+      - NODE_ENV=production
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - COWRIE_LOG_PATH=/var/log/cowrie/cowrie.json
+      - OPENCANARY_LOG_PATH=/var/log/opencanary/opencanary.json
+    networks:
+      - sg_deception_dmz
+      - sg_core_net
+
+  honeypot-manager-service:
+    build: ./honeypot-manager-service
+    ports:
+      - "3010:3000"
+    environment:
+      - NODE_ENV=production
+      - COWRIE_HOST=cowrie
+      - OPENCANARY_HOST=opencanary
+    networks:
+      - sg_core_net
+      - sg_deception_dmz
+
+  # ============================================================================
+  # 4. ML DETECTION & CLASSIFICATION PIPELINE
+  # ============================================================================
+  flow-feature-extraction-service:
+    build: ./flow-feature-extraction-service
+    ports:
+      - "3002:3000"
+    depends_on:
+      - traffic-capture-service
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+    networks:
+      - sg_core_net
+
+  ml-detection-service:
+    build: ./ml-detection-service
+    ports:
+      - "8001:8000"
+    depends_on:
+      - flow-feature-extraction-service
+    volumes:
+      - ./models:/app/models
+      - ./shared:/app/shared:ro
+      - ./data:/app/data:ro
+    environment:
+      - MODEL_PATH=/app/models
+    networks:
+      - sg_core_net
+
+  threat-classification-service:
+    build: ./threat-classification-service
+    ports:
+      - "8002:8000"
+    depends_on:
+      - ml-detection-service
+    volumes:
+      - ./models:/app/models
+    environment:
+      - MODEL_PATH=/app/models
+    networks:
+      - sg_core_net
+
+  # ============================================================================
+  # 5. SOAR, ENFORCEMENT & PERSISTENCE
+  # ============================================================================
+  playbook-decision-engine:
+    build: ./playbook-decision-engine
+    ports:
+      - "3003:3000"
+    depends_on:
+      - threat-classification-service
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+      - PLAYBOOK_RULES_PATH=/app/rules/playbook-rules.json
+    networks:
+      - sg_core_net
+
+  alert-notification-service:
+    build: ./alert-notification-service
+    ports:
+      - "3004:3000"
+    depends_on:
+      - playbook-decision-engine
+    volumes:
+      - ./alert-notification-service/data:/app/data
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_FROM=${SMTP_FROM}
+      - ALERT_RECIPIENTS=${ALERT_RECIPIENTS}
+      - ALERT_CRITICAL_ONLY=${ALERT_CRITICAL_ONLY}
+      - ALWAYS_CC_SENDER=true
+      - ALERT_CONFIG_DIR=/app/data
+    networks:
+      - sg_core_net
+
+  automated-response-service:
+    build: ./automated-response-service
+    ports:
+      - "3005:3000"
+    depends_on:
+      - alert-notification-service
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+      - ENABLE_LOCAL_IPTABLES=false
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - DECEPTION_MANAGER_URL=http://deception-manager-service:3013
+    networks:
+      - sg_core_net
+
+  threat-log-database-service:
+    build: ./threat-log-database-service
+    ports:
+      - "3006:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+      - DB_HOST=postgres
+      - DB_USER=user
+      - DB_PASS=password
+      - DB_NAME=threat_logs
+      - DB_PORT=5432
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+    networks:
+      - sg_core_net
+      - sg_storage_net
+
+  model-training-service:
+    build: ./model-training-service
+    ports:
+      - "8003:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./shared:/app/shared:ro
+    environment:
+      - DATA_PATH=/app/data
+      - MODEL_PATH=/app/models
+    networks:
+      - sg_core_net
+      - sg_storage_net
+
+  # ============================================================================
+  # 5B. STAGE 4 INTELLIGENCE, PROFILING, CORRELATION & ATTACK CHAIN SERVICES
+  # ============================================================================
+  threat-intelligence-service:
+    build: ./threat-intelligence-service
+    container_name: sg-threat-intel
+    ports:
+      - "3012:3012"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - PORT=3012
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - ABUSEIPDB_API_KEY=${ABUSEIPDB_API_KEY:-}
+      - VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY:-}
+      - OTX_API_KEY=${OTX_API_KEY:-}
+    networks:
+      - sg_core_net
+
+  attacker-profiling-service:
+    build: ./attacker-profiling-service
+    container_name: sg-attacker-profiling
+    ports:
+      - "8004:8004"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      threat-intelligence-service:
+        condition: service_started
+    environment:
+      - NODE_ENV=production
+      - PORT=8004
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - THREAT_INTEL_URL=http://threat-intelligence-service:3012
+      - DATABASE_SERVICE_URL=http://threat-log-database-service:3000
+    networks:
+      - sg_core_net
+
+  event-correlation-service:
+    build: ./event-correlation-service
+    container_name: sg-event-correlation
+    ports:
+      - "8005:8005"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      attacker-profiling-service:
+        condition: service_started
+    environment:
+      - NODE_ENV=production
+      - PORT=8005
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - DATABASE_SERVICE_URL=http://threat-log-database-service:3000
+      - ATTACK_CHAIN_URL=http://attack-chain-service:8006
+    networks:
+      - sg_core_net
+
+  attack-chain-service:
+    build: ./attack-chain-service
+    container_name: sg-attack-chain
+    ports:
+      - "8006:8006"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - PORT=8006
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+    networks:
+      - sg_core_net
+
+  # ============================================================================
+  # 5C. STAGE 5 DYNAMIC DECEPTION MANAGEMENT SERVICE
+  # ============================================================================
+  deception-manager-service:
+    build: ./deception-manager-service
+    container_name: sg-deception-manager
+    ports:
+      - "3013:3013"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      honeypot-manager-service:
+        condition: service_started
+    environment:
+      - NODE_ENV=production
+      - PORT=3013
+      - RABBITMQ_URL=amqp://shadowguard:shadowguard_secret@rabbitmq:5672
+      - HONEYPOT_MANAGER_URL=http://honeypot-manager-service:3010
+    networks:
+      - sg_core_net
+
+  # ============================================================================
+  # 6. DEMO GENERATOR & THREAT DASHBOARD
+  # ============================================================================
+  demo-traffic-generator:
+    image: python:3.11-slim
+    working_dir: /app
+    command: ["python", "auto_demo.py"]
+    ports:
+      - "8010:8010"
+    depends_on:
+      - traffic-capture-service
+      - threat-log-database-service
+      - threat-dashboard-service
+    volumes:
+      - ./:/app
+    environment:
+      - CAPTURE_URL=http://traffic-capture-service:3000/capture
+      - DASHBOARD_URL=http://threat-dashboard-service:3000
+      - SIMULATOR_HOST=0.0.0.0
+      - SIMULATOR_PORT=8010
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8010/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - sg_ingress_net
+      - sg_core_net
+
+  threat-dashboard-service:
+    build: ./threat-dashboard-service
+    ports:
+      - "7000:3000"
+    depends_on:
+      - traffic-capture-service
+      - flow-feature-extraction-service
+      - ml-detection-service
+      - threat-classification-service
+      - playbook-decision-engine
+      - alert-notification-service
+      - automated-response-service
+      - threat-log-database-service
+      - model-training-service
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEMO_SIMULATOR_URL=http://demo-traffic-generator:8010
+    networks:
+      - sg_frontend_net
+      - sg_core_net
+
+volumes:
+  postgres_data:
+  suricata_logs:
+  cowrie_logs:
+  opencanary_logs:

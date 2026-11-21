@@ -1,0 +1,179 @@
+{
+  "generated_at": "2026-11-18T14:39:45.702Z",
+  "dataset_size": 500,
+  "scenarios_count": 10,
+  "cohorts": {
+    "COHORT_A_SG_1_0_ML_ONLY": {
+      "cohort_id": "COHORT_A_SG_1_0_ML_ONLY",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 216,
+        "fp": 24,
+        "tn": 116,
+        "fn": 144
+      },
+      "metrics": {
+        "precision": 90,
+        "recall": 60,
+        "f1_score": 72,
+        "accuracy": 66.4,
+        "false_positive_rate": 17.14
+      },
+      "latency_ms": {
+        "p50": 0.0002,
+        "p95": 0.0007,
+        "p99": 0.0028
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 240,
+        "consolidated_incidents": 240,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 82.86,
+        "S02_PORT_SCANNING": 75,
+        "S03_SSH_BRUTE_FORCE": 65,
+        "S04_HTTP_FTP_SMB_RECON": 50,
+        "S05_HONEYPOT_COMMAND_EXEC": 25,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 35,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 75,
+        "S09_C2_BEACONING": 65,
+        "S10_MULTI_STAGE_PROGRESSION": 50
+      }
+    },
+    "COHORT_B_SG_2_0_SURICATA": {
+      "cohort_id": "COHORT_B_SG_2_0_SURICATA",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 276,
+        "fp": 13,
+        "tn": 127,
+        "fn": 84
+      },
+      "metrics": {
+        "precision": 95.5,
+        "recall": 76.67,
+        "f1_score": 85.05,
+        "accuracy": 80.6,
+        "false_positive_rate": 9.29
+      },
+      "latency_ms": {
+        "p50": 0.0001,
+        "p95": 0.0002,
+        "p99": 0.0005
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 289,
+        "consolidated_incidents": 289,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 90.71,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 65,
+        "S04_HTTP_FTP_SMB_RECON": 82.5,
+        "S05_HONEYPOT_COMMAND_EXEC": 25,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 67.5,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 50
+      }
+    },
+    "COHORT_C_SG_2_0_HONEYPOTS": {
+      "cohort_id": "COHORT_C_SG_2_0_HONEYPOTS",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 326,
+        "fp": 13,
+        "tn": 127,
+        "fn": 34
+      },
+      "metrics": {
+        "precision": 96.17,
+        "recall": 90.56,
+        "f1_score": 93.28,
+        "accuracy": 90.6,
+        "false_positive_rate": 9.29
+      },
+      "latency_ms": {
+        "p50": 0.0001,
+        "p95": 0.0002,
+        "p99": 0.0006
+      },
+      "throughput_events_per_sec": 500000,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 339,
+        "consolidated_incidents": 339,
+        "alert_fatigue_reduction_pct": 0,
+        "reconstructed_attack_chains": 0,
+        "adaptive_deception_directives": 0,
+        "mean_time_to_containment_ms": null
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 90.71,
+        "S02_PORT_SCANNING": 75,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 75,
+        "S09_C2_BEACONING": 65,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      }
+    },
+    "COHORT_D_SG_2_0_COMPLETE_INTEGRATED": {
+      "cohort_id": "COHORT_D_SG_2_0_COMPLETE_INTEGRATED",
+      "total_samples": 500,
+      "confusion_matrix": {
+        "tp": 360,
+        "fp": 6,
+        "tn": 134,
+        "fn": 0
+      },
+      "metrics": {
+        "precision": 98.36,
+        "recall": 100,
+        "f1_score": 99.17,
+        "accuracy": 98.8,
+        "false_positive_rate": 4.29
+      },
+      "latency_ms": {
+        "p50": 0.1155,
+        "p95": 1.0605,
+        "p99": 1.847
+      },
+      "throughput_events_per_sec": 3738,
+      "correlation_and_soar": {
+        "raw_alerts_generated": 366,
+        "consolidated_incidents": 5,
+        "alert_fatigue_reduction_pct": 98.63,
+        "reconstructed_attack_chains": 5,
+        "adaptive_deception_directives": 709,
+        "mean_time_to_containment_ms": 0.467
+      },
+      "per_scenario_accuracy_or_recall_pct": {
+        "S01_NORMAL_TRAFFIC": 95.71,
+        "S02_PORT_SCANNING": 100,
+        "S03_SSH_BRUTE_FORCE": 100,
+        "S04_HTTP_FTP_SMB_RECON": 100,
+        "S05_HONEYPOT_COMMAND_EXEC": 100,
+        "S06_MALWARE_SAMPLE_DOWNLOAD": 100,
+        "S07_DDOS_VOLUMETRIC": 100,
+        "S08_DATA_EXFILTRATION": 100,
+        "S09_C2_BEACONING": 100,
+        "S10_MULTI_STAGE_PROGRESSION": 100
+      }
+    }
+  }
+}
